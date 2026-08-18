@@ -3,6 +3,7 @@ services:
     name: monthsary
     env: static
     buildCommand: echo "No build needed"
+    startCommand: echo "Static site - no start command needed"
     staticPublishPath: .
     headers:
       - source: /
