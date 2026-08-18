@@ -1,10 +1,9 @@
 services:
   - type: web
     name: monthsary
-    env: static
-    buildCommand: echo "No build needed"
-    startCommand: echo "Static site - no start command needed"
-    staticPublishPath: .
+    env: node
+    buildCommand: npm install -g serve
+    startCommand: serve -s . -l 8080
     headers:
       - source: /
         headers:
