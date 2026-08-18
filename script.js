@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  const envelopeLanding = document.getElementById('envelope-landing');
+  const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+  const story = document.getElementById('story');
   const openStoryBtn = document.getElementById('open-story-btn');
   const replayBtn = document.getElementById('replay-btn');
   const playBtn = document.getElementById('play-btn');
@@ -9,6 +12,9 @@
   const reasonText = document.getElementById('reason-text');
   const closeReason = document.getElementById('close-reason');
   const petalsContainer = document.querySelector('.petals');
+
+  let sectionObserver = null;
+  let storyReady = false;
 
   /* ── Floating petals ── */
   function createPetals() {
@@ -23,6 +29,74 @@
       petal.style.fontSize = 0.8 + Math.random() * 0.8 + 'rem';
       petalsContainer.appendChild(petal);
     }
+  }
+
+  /* ── Scroll reveal ── */
+  function observeSections() {
+    if (sectionObserver) return;
+
+    const sections = document.querySelectorAll('.section');
+
+    sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    sections.forEach(function (section) {
+      sectionObserver.observe(section);
+    });
+
+    var hero = document.getElementById('hero');
+    if (hero) hero.classList.add('visible');
+  }
+
+  function revealStory() {
+    if (storyReady) return;
+    storyReady = true;
+
+    document.body.classList.add('story-open');
+    story.classList.remove('hidden');
+    observeSections();
+
+    requestAnimationFrame(function () {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+  }
+
+  function openEnvelope() {
+    if (!envelopeLanding || envelopeLanding.classList.contains('is-opening')) return;
+
+    envelopeLanding.classList.add('is-opening');
+
+    window.setTimeout(function () {
+      envelopeLanding.classList.add('is-opened');
+      revealStory();
+    }, 650);
+  }
+
+  function resetEnvelope() {
+    storyReady = false;
+    document.body.classList.remove('story-open');
+    story.classList.add('hidden');
+
+    if (envelopeLanding) {
+      envelopeLanding.classList.remove('is-opening', 'is-opened');
+    }
+
+    document.querySelectorAll('.section').forEach(function (el) {
+      el.classList.remove('visible');
+    });
+  }
+
+  /* ── Envelope tap ── */
+  if (openEnvelopeBtn) {
+    openEnvelopeBtn.addEventListener('click', openEnvelope);
   }
 
   /* ── Open our story → scroll to chapters ── */
@@ -41,10 +115,6 @@
     replayBtn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      document.querySelectorAll('.section').forEach(function (el) {
-        el.classList.remove('visible');
-      });
-
       document.querySelectorAll('.reason-card.opened').forEach(function (el) {
         el.classList.remove('opened');
       });
@@ -56,32 +126,8 @@
         playBtn.querySelector('.play-icon').textContent = '▶';
       }
 
-      var hero = document.getElementById('hero');
-      if (hero) hero.classList.add('visible');
+      resetEnvelope();
     });
-  }
-
-  /* ── Scroll reveal ── */
-  function observeSections() {
-    const sections = document.querySelectorAll('.section');
-
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    sections.forEach(function (section) {
-      observer.observe(section);
-    });
-
-    var hero = document.getElementById('hero');
-    if (hero) hero.classList.add('visible');
   }
 
   /* ── Reason cards ── */
@@ -142,5 +188,4 @@
 
   /* ── Init ── */
   createPetals();
-  observeSections();
 })();
