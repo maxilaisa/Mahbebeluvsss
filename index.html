@@ -7,14 +7,48 @@
   <meta name="description" content="A little surprise for my favorite person ♡">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Floating petals -->
-  <div class="petals" aria-hidden="true"></div>
+  <div class="petals petals--idle" aria-hidden="true"></div>
 
-  <main id="story" class="story">
+  <!-- Envelope landing -->
+  <div id="envelope-landing" class="envelope-landing">
+    <div class="envelope-scene">
+      <h1 class="envelope-title">For you</h1>
+
+      <div class="envelope-stage">
+        <img
+          class="envelope-img"
+          src="assets/envelope/envelope-pink.svg"
+          alt=""
+          width="800"
+          height="573"
+          draggable="false"
+        >
+        <button
+          id="open-envelope-btn"
+          class="envelope-seal"
+          type="button"
+          aria-label="Tap the letter to open"
+        >
+          <img
+            src="assets/envelope/wax-seal.png"
+            alt=""
+            width="800"
+            height="751"
+            draggable="false"
+          >
+        </button>
+      </div>
+
+      <p class="envelope-hint">tap on the letter to open</p>
+    </div>
+  </div>
+
+  <main id="story" class="story hidden">
     <!-- Hero -->
     <section class="section hero" id="hero">
       <span class="section-tag">page one · our story</span>
