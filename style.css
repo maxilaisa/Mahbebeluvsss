@@ -41,6 +41,119 @@ body {
   display: none !important;
 }
 
+/* ── Envelope Landing ── */
+.envelope-landing {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3ed;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.envelope-landing.is-opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope-scene {
+  width: min(92vw, 520px);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.envelope-title {
+  font-family: 'Great Vibes', 'Brush Script MT', cursive;
+  font-size: clamp(2.75rem, 10vw, 4.25rem);
+  font-weight: 400;
+  color: var(--rose-dark);
+  text-shadow: rgba(169, 67, 87, 0.2) 1px 1px 1px;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.envelope-stage {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.envelope-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.envelope-seal {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 26%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.35s ease, opacity 0.45s ease;
+}
+
+.envelope-seal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(169, 67, 87, 0.25));
+}
+
+.envelope-seal:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.envelope-seal:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+.envelope-hint {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--rose-dark);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.envelope-landing.is-opening .envelope-title,
+.envelope-landing.is-opening .envelope-hint {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.envelope-landing.is-opening .envelope-seal {
+  opacity: 0;
+  transform: translate(-50%, -72%) scale(1.15);
+}
+
+.envelope-landing.is-opening .envelope-img {
+  opacity: 0;
+  transform: translateY(-24px) scale(1.03);
+}
+
+.petals--idle {
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
+}
+
+body.story-open .petals--idle {
+  opacity: 1;
+}
+
 .script-title {
   font-family: var(--font-script);
   font-weight: 600;
@@ -866,12 +979,25 @@ body {
   html {
     scroll-behavior: auto;
   }
+
+  .envelope-landing.is-opening .envelope-seal,
+  .envelope-landing.is-opening .envelope-img {
+    transform: none;
+  }
 }
 
 /* ── Responsive ── */
 @media (max-width: 480px) {
   .section {
     padding: 3.5rem 1.25rem;
+  }
+
+  .envelope-scene {
+    width: min(94vw, 420px);
+  }
+
+  .envelope-hint {
+    font-size: 0.72rem;
   }
 
   .letter-paper {
