@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 573" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="pinkBase" x1="400" y1="0" x2="400" y2="573" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f4b8c2"/>
+      <stop offset="1" stop-color="#e07d90"/>
+    </linearGradient>
+    <linearGradient id="pinkFlap" x1="400" y1="0" x2="400" y2="573" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efc4cc"/>
+      <stop offset="1" stop-color="#d66b80"/>
+    </linearGradient>
+    <linearGradient id="pinkTop" x1="400" y1="80" x2="400" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8d4da"/>
+      <stop offset="1" stop-color="#cf5f76"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#8f3d4f" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="linen" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#000" fill-opacity="0"/>
+      <path d="M0 8 L8 0" stroke="#fff" stroke-opacity="0.06" stroke-width="1"/>
+      <path d="M-2 2 L2 -2" stroke="#8f3d4f" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Body -->
+  <rect x="72" y="72" width="656" height="429" rx="6" fill="url(#pinkBase)" filter="url(#softShadow)"/>
+  <rect x="72" y="72" width="656" height="429" rx="6" fill="url(#linen)"/>
+
+  <!-- Bottom flap -->
+  <path d="M72 501 L400 290 L728 501 Z" fill="#d66b80"/>
+  <path d="M72 501 L400 290 L728 501 Z" fill="url(#linen)"/>
+
+  <!-- Left flap -->
+  <path d="M72 72 L72 501 L400 290 Z" fill="#e07d90"/>
+  <path d="M72 72 L72 501 L400 290 Z" fill="url(#linen)" fill-opacity="0.7"/>
+
+  <!-- Right flap -->
+  <path d="M728 72 L728 501 L400 290 Z" fill="#e07d90"/>
+  <path d="M728 72 L728 501 L400 290 Z" fill="url(#linen)" fill-opacity="0.7"/>
+
+  <!-- Top flap -->
+  <path d="M72 72 L728 72 L400 290 Z" fill="url(#pinkTop)"/>
+  <path d="M72 72 L728 72 L400 290 Z" fill="url(#linen)" fill-opacity="0.55"/>
+
+  <!-- Fold lines -->
+  <path d="M72 72 L400 290 L728 72" stroke="#b84d62" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M72 501 L400 290 L728 501" stroke="#b84d62" stroke-opacity="0.14" stroke-width="2"/>
+  <path d="M72 72 L72 501 L400 290" stroke="#b84d62" stroke-opacity="0.12" stroke-width="1.5"/>
+  <path d="M728 72 L728 501 L400 290" stroke="#b84d62" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- Inner highlight -->
+  <ellipse cx="400" cy="295" rx="58" ry="24" fill="#fff" fill-opacity="0.08"/>
+</svg>
