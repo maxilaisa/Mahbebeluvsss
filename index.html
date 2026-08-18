@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-PH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Monthsary — Interactive Love Story</title>
+  <meta name="description" content="A little surprise for my favorite person ♡">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Floating petals -->
+  <div class="petals" aria-hidden="true"></div>
+
+  <main id="story" class="story">
+    <!-- Hero -->
+    <section class="section hero" id="hero">
+      <span class="section-tag">page one · our story</span>
+      <h2 class="hero-title script-title">Happy Monthsary,<br>My Love <span class="heart">♡</span></h2>
+      <p class="lead">Another month of us, another month of memories.</p>
+      <button id="open-story-btn" class="scroll-cue" type="button">
+        <span>Open our story</span>
+        <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <!-- Chapters -->
+    <section class="section chapters" id="chapters">
+      <span class="section-tag">our story</span>
+      <h2 class="section-title">Little chapters of us</h2>
+
+      <div class="timeline">
+        <article class="chapter-card">
+          <div class="chapter-num">01</div>
+          <h3>Where it all started</h3>
+          <p class="date">[Date]</p>
+          <p>Write how your story began here.</p>
+        </article>
+        <article class="chapter-card">
+          <div class="chapter-num">02</div>
+          <h3>Our first memories</h3>
+          <p class="date">[Date]</p>
+          <p>Add the little moments you still remember.</p>
+        </article>
+        <article class="chapter-card">
+          <div class="chapter-num">03</div>
+          <h3>The moments that made me smile</h3>
+          <p class="date">[Date]</p>
+          <p>A favorite memory, joke, call, or adventure.</p>
+        </article>
+        <article class="chapter-card">
+          <div class="chapter-num">04</div>
+          <h3>The times we got through together</h3>
+          <p class="date">[Date]</p>
+          <p>A reminder that you've grown together.</p>
+        </article>
+        <article class="chapter-card">
+          <div class="chapter-num">05</div>
+          <h3>Where we are now</h3>
+          <p class="date">[Date]</p>
+          <p>And this is only another chapter.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Scrapbook -->
+    <section class="section scrapbook" id="scrapbook">
+      <span class="section-tag">our little scrapbook</span>
+      <h2 class="section-title">Memories I want to keep forever</h2>
+
+      <div class="photo-grid">
+        <figure class="polaroid tilt-left">
+          <div class="photo-slot">
+            <span class="photo-placeholder">YOUR PHOTO</span>
+          </div>
+          <figcaption class="script-caption">my favorite memory ♡</figcaption>
+        </figure>
+        <figure class="polaroid tilt-right">
+          <div class="photo-slot">
+            <span class="photo-placeholder">YOUR PHOTO</span>
+          </div>
+          <figcaption class="script-caption">you make everything better</figcaption>
+        </figure>
+        <figure class="polaroid tilt-left">
+          <div class="photo-slot">
+            <span class="photo-placeholder">YOUR PHOTO</span>
+          </div>
+          <figcaption class="script-caption">one of my favorite days</figcaption>
+        </figure>
+        <figure class="polaroid tilt-right">
+          <div class="photo-slot">
+            <span class="photo-placeholder">YOUR PHOTO</span>
+          </div>
+          <figcaption class="script-caption">us ♡</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Bouquet -->
+    <section class="section bouquet" id="bouquet">
+      <span class="section-tag">a bouquet for you</span>
+      <h2 class="section-title">Hi, I made this bouquet for you! <span class="heart">♡</span></h2>
+      <p class="bouquet-intro">A little garden of memories, picked just for you.</p>
+
+      <div class="digibouquet">
+        <div class="digibouquet-oval">
+          <div class="digibouquet-stage">
+            <img
+              class="digibouquet-bush"
+              src="assets/bouquet/bush-3.png"
+              alt=""
+              width="600"
+              height="500"
+              aria-hidden="true"
+            >
+
+            <div class="digibouquet-flowers">
+              <div class="digibouquet-flower" style="order: 3; --rot: -3.13deg">
+                <img src="assets/bouquet/peony.webp" alt="peony" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 6; --rot: -2.4deg">
+                <img src="assets/bouquet/orchid.webp" alt="orchid" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 0; --rot: -0.76deg">
+                <img src="assets/bouquet/orchid.webp" alt="orchid" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 6; --rot: -3.96deg">
+                <img src="assets/bouquet/rose.webp" alt="rose" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 1; --rot: -4.91deg">
+                <img src="assets/bouquet/ranunculus.webp" alt="ranunculus" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 7; --rot: -3.5deg">
+                <img src="assets/bouquet/ranunculus.webp" alt="ranunculus" width="120" height="120">
+              </div>
+              <div class="digibouquet-flower" style="order: 4; --rot: 0.23deg">
+                <img src="assets/bouquet/zinnia.webp" alt="zinnia" width="120" height="120">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="digibouquet-card">
+          <p class="digibouquet-dear">Dear love,</p>
+          <p class="digibouquet-message">
+            If I could, I'd give you these flowers in person.
+            But for now, here's a little bouquet made just for you. ♡
+          </p>
+          <p class="digibouquet-sign">Love, always ♡</p>
+        </div>
+      </div>
+
+      <p class="bouquet-tip">Tip: swap any flower <code>src</code> with your photo, e.g. <code>photos/us.jpg</code></p>
+    </section>
+
+    <!-- Love letter -->
+    <section class="section letter" id="letter">
+      <span class="section-tag">from my heart</span>
+      <h2 class="section-title">A little letter for you...</h2>
+
+      <div class="letter-paper">
+        <p class="letter-greeting script-title">Dear love,</p>
+        <p class="letter-body">
+          [Write your personal message here. Tell her what she means to you,
+          what you appreciate about her, and what you're looking forward to
+          experiencing together.]
+        </p>
+        <p class="letter-sign script-title">Love, always <span class="heart">♡</span></p>
+      </div>
+    </section>
+
+    <!-- Reasons -->
+    <section class="section reasons" id="reasons">
+      <span class="section-tag">tiny reasons</span>
+      <h2 class="section-title">Reasons I love you</h2>
+
+      <div class="reasons-grid">
+        <button class="reason-card" data-reason="Your smile lights up my whole day.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+        <button class="reason-card" data-reason="You make ordinary moments feel special.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+        <button class="reason-card" data-reason="Your laugh is my favorite sound.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+        <button class="reason-card" data-reason="You're patient, kind, and so easy to love.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+        <button class="reason-card" data-reason="Every day with you feels like a gift.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+        <button class="reason-card" data-reason="I fall for you a little more every month.">
+          <span class="reason-icon">✉</span>
+          <span class="reason-label">Open me</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Memories -->
+    <section class="section memories" id="memories">
+      <span class="section-tag">favorite memories</span>
+      <h2 class="section-title">Little moments, big feelings</h2>
+
+      <div class="memory-cards">
+        <article class="memory-card">
+          <div class="memory-photo">
+            <span>PHOTO</span>
+          </div>
+          <div class="memory-content">
+            <h3>[Memory title]</h3>
+            <p class="date">[DATE]</p>
+            <p>[Short description]</p>
+          </div>
+        </article>
+        <article class="memory-card">
+          <div class="memory-photo">
+            <span>PHOTO</span>
+          </div>
+          <div class="memory-content">
+            <h3>[Memory title]</h3>
+            <p class="date">[DATE]</p>
+            <p>[Short description]</p>
+          </div>
+        </article>
+        <article class="memory-card">
+          <div class="memory-photo">
+            <span>PHOTO</span>
+          </div>
+          <div class="memory-content">
+            <h3>[Memory title]</h3>
+            <p class="date">[DATE]</p>
+            <p>[Short description]</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Song -->
+    <section class="section song" id="song">
+      <span class="section-tag">our song</span>
+      <h2 class="section-title">A song that feels like us <span class="heart">♡</span></h2>
+
+      <div class="music-player">
+        <button id="play-btn" class="play-btn" aria-label="Play our song">
+          <span class="play-icon">▶</span>
+        </button>
+        <div class="track-info">
+          <h3>Our song <span class="heart">♡</span></h3>
+          <p class="track-meta">[Song title] — [Artist]</p>
+          <p class="track-desc">A tiny soundtrack for our memories.</p>
+        </div>
+      </div>
+      <audio id="our-song" preload="none">
+        <!-- Add your song: <source src="your-song.mp3" type="audio/mpeg"> -->
+      </audio>
+    </section>
+
+    <!-- Finale -->
+    <section class="section finale" id="finale">
+      <span class="section-tag">the last page, for now</span>
+      <h2 class="finale-title">Thank you for being part of my life. <span class="heart">♡</span></h2>
+      <p class="finale-script script-title">I love you, always and in all ways. <span class="heart">♡</span></p>
+      <p class="finale-text">
+        Here's to more memories, more laughs, more random conversations,
+        more adventures, and more months with you.
+      </p>
+      <button id="replay-btn" class="replay-btn">
+        <span>Replay our story</span>
+        <span class="replay-icon">↻</span>
+      </button>
+    </section>
+  </main>
+
+  <!-- Reason modal -->
+  <div id="reason-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="reason-text">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <p id="reason-text" class="reason-reveal"></p>
+      <button id="close-reason" class="modal-close">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
