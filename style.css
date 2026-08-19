@@ -966,6 +966,12 @@ body.story-open .petals--idle {
   pointer-events: auto;
   max-width: 350px;
   border: 2px solid var(--blush);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.error-message.disappearing {
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
 }
 
 .error-message:first-child {
@@ -1291,6 +1297,10 @@ body.story-open .petals--idle {
 
 .modal-close:hover {
   background: var(--blush);
+}
+
+.modal-content-no-close {
+  padding: 2.5rem 2rem;
 }
 
 /* ── Reduced Motion ── */

@@ -14,6 +14,8 @@
   const reasonModal = document.getElementById('reason-modal');
   const reasonText = document.getElementById('reason-text');
   const closeReason = document.getElementById('close-reason');
+  const firstMessageModal = document.getElementById('first-message-modal');
+  const firstMessageText = document.getElementById('first-message-text');
   const petalsContainer = document.querySelector('.petals');
   const errorOverlay = document.getElementById('error-overlay');
   const errorMessages = document.getElementById('error-messages');
@@ -391,14 +393,14 @@
     continueBtn.classList.add('hidden');
     errorMessages.innerHTML = '';
 
-    // Show first message in the center normally
+    // Show first message in the center normally (no close button)
     const firstMessage = specialMessages[0];
-    reasonText.textContent = firstMessage;
-    reasonModal.classList.remove('hidden');
+    firstMessageText.textContent = firstMessage;
+    firstMessageModal.classList.remove('hidden');
 
     // After 3 seconds, hide modal and start popping up rest of messages
     setTimeout(function () {
-      reasonModal.classList.add('hidden');
+      firstMessageModal.classList.add('hidden');
       
       const usedPositions = [];
       let index = 1; // Start from index 1 (skip first message)
@@ -422,24 +424,25 @@
         // Calculate safe random position to avoid overlap
         const containerWidth = window.innerWidth;
         const containerHeight = window.innerHeight;
-        const messageWidth = Math.min(350, containerWidth * 0.4);
-        const messageHeight = 80;
+        const messageWidth = Math.min(300, containerWidth * 0.35);
+        const messageHeight = 70;
         
         let randomX, randomY;
         let attempts = 0;
         let foundPosition = false;
         
         // Try to find a position that doesn't overlap too much
-        while (!foundPosition && attempts < 20) {
-          randomX = Math.max(20, Math.random() * (containerWidth - messageWidth - 40));
-          randomY = Math.max(20, Math.random() * (containerHeight - messageHeight - 40));
+        while (!foundPosition && attempts < 30) {
+          randomX = Math.max(30, Math.random() * (containerWidth - messageWidth - 60));
+          randomY = Math.max(30, Math.random() * (containerHeight - messageHeight - 60));
           
           // Check if this position overlaps with existing messages
           let overlaps = false;
           for (const pos of usedPositions) {
             const dx = Math.abs(randomX - pos.x);
             const dy = Math.abs(randomY - pos.y);
-            if (dx < 150 && dy < 80) {
+            // Increased overlap threshold for better spacing
+            if (dx < 180 && dy < 100) {
               overlaps = true;
               break;
             }
@@ -470,8 +473,19 @@
 
   if (continueBtn) {
     continueBtn.addEventListener('click', function () {
-      errorOverlay.classList.add('hidden');
-      errorMessages.innerHTML = '';
+      // Add disappearing animation to all messages
+      const messages = errorMessages.querySelectorAll('.error-message');
+      messages.forEach(function (msg, index) {
+        setTimeout(function () {
+          msg.classList.add('disappearing');
+        }, index * 50); // Stagger the disappear animation
+      });
+
+      // Hide overlay after all animations complete
+      setTimeout(function () {
+        errorOverlay.classList.add('hidden');
+        errorMessages.innerHTML = '';
+      }, messages.length * 50 + 500);
     });
   }
 
