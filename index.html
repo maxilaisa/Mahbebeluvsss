@@ -20,13 +20,26 @@
       <h1 class="lock-title">♡ Our Anniversary ♡</h1>
       <p class="lock-hint">Enter our special date to unlock</p>
       <div class="pin-inputs">
-        <input type="text" maxlength="1" class="pin-box" data-index="0" inputmode="numeric">
-        <input type="text" maxlength="1" class="pin-box" data-index="1" inputmode="numeric">
-        <input type="text" maxlength="1" class="pin-box" data-index="2" inputmode="numeric">
-        <input type="text" maxlength="1" class="pin-box" data-index="3" inputmode="numeric">
+        <input type="text" maxlength="1" class="pin-box" data-index="0" inputmode="numeric" readonly>
+        <input type="text" maxlength="1" class="pin-box" data-index="1" inputmode="numeric" readonly>
+        <input type="text" maxlength="1" class="pin-box" data-index="2" inputmode="numeric" readonly>
+        <input type="text" maxlength="1" class="pin-box" data-index="3" inputmode="numeric" readonly>
       </div>
       <p id="lock-error" class="lock-error hidden">Try again! 💕</p>
-      <p class="lock-hint-small">Hint: June 11</p>
+      <div class="numeric-keypad">
+        <button class="keypad-btn" data-num="1">1</button>
+        <button class="keypad-btn" data-num="2">2</button>
+        <button class="keypad-btn" data-num="3">3</button>
+        <button class="keypad-btn" data-num="4">4</button>
+        <button class="keypad-btn" data-num="5">5</button>
+        <button class="keypad-btn" data-num="6">6</button>
+        <button class="keypad-btn" data-num="7">7</button>
+        <button class="keypad-btn" data-num="8">8</button>
+        <button class="keypad-btn" data-num="9">9</button>
+        <button class="keypad-btn keypad-clear" data-action="clear">✕</button>
+        <button class="keypad-btn" data-num="0">0</button>
+        <button class="keypad-btn keypad-submit" data-action="submit">♡</button>
+      </div>
     </div>
   </div>
 

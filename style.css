@@ -90,6 +90,7 @@
   transition: all 0.3s ease;
   outline: none;
   caret-color: var(--rose-dark);
+  cursor: pointer;
 }
 
 .pin-box:focus {
@@ -101,6 +102,58 @@
 .pin-box.filled {
   border-color: var(--rose);
   background: var(--blush-soft);
+}
+
+.numeric-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.keypad-btn {
+  width: 70px;
+  height: 70px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  border: 2px solid var(--blush);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--text);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad-btn:hover {
+  border-color: var(--rose);
+  background: var(--blush-soft);
+  transform: scale(1.05);
+}
+
+.keypad-btn:active {
+  transform: scale(0.95);
+}
+
+.keypad-clear {
+  color: var(--rose-dark);
+  font-size: 1.5rem;
+}
+
+.keypad-submit {
+  background: linear-gradient(135deg, var(--rose-dark) 0%, var(--rose) 100%);
+  color: var(--white);
+  border-color: var(--rose-dark);
+  font-size: 1.5rem;
+}
+
+.keypad-submit:hover {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--blush) 100%);
+  border-color: var(--rose);
 }
 
 .lock-error {

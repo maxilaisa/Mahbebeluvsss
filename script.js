@@ -22,72 +22,90 @@
 
   /* ── Lock Screen ── */
   function setupLockScreen() {
-    pinBoxes.forEach(function (box, index) {
-      box.addEventListener('input', function (e) {
-        const value = e.target.value;
-        
-        // Only allow numbers
-        if (!/^\d*$/.test(value)) {
-          e.target.value = '';
-          return;
-        }
+    const keypadBtns = document.querySelectorAll('.keypad-btn');
 
-        if (value.length === 1) {
-          e.target.classList.add('filled');
-          // Move to next box
-          if (index < pinBoxes.length - 1) {
-            pinBoxes[index + 1].focus();
-          } else {
-            // Last box filled, check code
-            checkPin();
-          }
-        } else {
-          e.target.classList.remove('filled');
-        }
-      });
+    keypadBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const num = btn.getAttribute('data-num');
+        const action = btn.getAttribute('data-action');
 
-      box.addEventListener('keydown', function (e) {
-        // Handle backspace
-        if (e.key === 'Backspace' && !e.target.value) {
-          if (index > 0) {
-            pinBoxes[index - 1].focus();
-            pinBoxes[index - 1].value = '';
-            pinBoxes[index - 1].classList.remove('filled');
-          }
-        }
-        // Handle arrow keys
-        if (e.key === 'ArrowLeft' && index > 0) {
-          pinBoxes[index - 1].focus();
-        }
-        if (e.key === 'ArrowRight' && index < pinBoxes.length - 1) {
-          pinBoxes[index + 1].focus();
-        }
-      });
-
-      box.addEventListener('paste', function (e) {
-        e.preventDefault();
-        const pastedData = e.clipboardData.getData('text').slice(0, 4);
-        const digits = pastedData.replace(/\D/g, '');
-        
-        digits.split('').forEach(function (digit, i) {
-          if (pinBoxes[i]) {
-            pinBoxes[i].value = digit;
-            pinBoxes[i].classList.add('filled');
-          }
-        });
-
-        if (digits.length === 4) {
+        if (num !== null) {
+          // Number button pressed
+          enterNumber(num);
+        } else if (action === 'clear') {
+          // Clear button pressed
+          clearPin();
+        } else if (action === 'submit') {
+          // Submit button pressed
           checkPin();
-        } else if (digits.length > 0) {
-          pinBoxes[Math.min(digits.length, 3)].focus();
         }
       });
     });
 
-    // Focus first box on load
-    if (pinBoxes.length > 0) {
-      pinBoxes[0].focus();
+    // Allow clicking on pin boxes to focus (for visual feedback)
+    pinBoxes.forEach(function (box, index) {
+      box.addEventListener('click', function () {
+        // Find first empty box and focus it
+        for (let i = 0; i < pinBoxes.length; i++) {
+          if (!pinBoxes[i].value) {
+            pinBoxes[i].focus();
+            return;
+          }
+        }
+        // If all filled, focus last one
+        pinBoxes[pinBoxes.length - 1].focus();
+      });
+    });
+
+    // Keyboard support as backup
+    document.addEventListener('keydown', function (e) {
+      if (!isLocked) return;
+      
+      if (/^\d$/.test(e.key)) {
+        enterNumber(e.key);
+      } else if (e.key === 'Backspace') {
+        deleteLastNumber();
+      } else if (e.key === 'Enter') {
+        checkPin();
+      } else if (e.key === 'Escape') {
+        clearPin();
+      }
+    });
+  }
+
+  function enterNumber(num) {
+    // Find first empty box
+    for (let i = 0; i < pinBoxes.length; i++) {
+      if (!pinBoxes[i].value) {
+        pinBoxes[i].value = num;
+        pinBoxes[i].classList.add('filled');
+        
+        // Check if all boxes are filled
+        if (i === pinBoxes.length - 1) {
+          checkPin();
+        }
+        return;
+      }
     }
+  }
+
+  function deleteLastNumber() {
+    // Find last filled box
+    for (let i = pinBoxes.length - 1; i >= 0; i--) {
+      if (pinBoxes[i].value) {
+        pinBoxes[i].value = '';
+        pinBoxes[i].classList.remove('filled');
+        return;
+      }
+    }
+  }
+
+  function clearPin() {
+    pinBoxes.forEach(function (box) {
+      box.value = '';
+      box.classList.remove('filled');
+    });
+    lockError.classList.add('hidden');
   }
 
   function checkPin() {
@@ -126,12 +144,10 @@
 
     // Clear and reset
     setTimeout(function () {
+      clearPin();
       pinBoxes.forEach(function (box) {
-        box.value = '';
-        box.classList.remove('filled');
         box.style.animation = '';
       });
-      pinBoxes[0].focus();
       
       setTimeout(function () {
         lockError.classList.add('hidden');
