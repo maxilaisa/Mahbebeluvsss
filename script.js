@@ -398,12 +398,12 @@
     firstMessageText.textContent = firstMessage;
     firstMessageModal.classList.remove('hidden');
 
-    // After 3 seconds, hide modal and start popping up rest of messages
+    // After 3 seconds, hide modal and start popping up ALL messages (including first)
     setTimeout(function () {
       firstMessageModal.classList.add('hidden');
       
       const usedPositions = [];
-      let index = 1; // Start from index 1 (skip first message)
+      let index = 0; // Start from index 0 (include first message)
       
       function showNextMessage() {
         if (index >= specialMessages.length) {
@@ -476,6 +476,9 @@
 
   if (continueBtn) {
     continueBtn.addEventListener('click', function () {
+      // Add disappearing animation to continue button
+      continueBtn.classList.add('disappearing');
+      
       // Add disappearing animation to all messages
       const messages = errorMessages.querySelectorAll('.error-message');
       messages.forEach(function (msg, index) {
@@ -488,6 +491,7 @@
       setTimeout(function () {
         errorOverlay.classList.add('hidden');
         errorMessages.innerHTML = '';
+        continueBtn.classList.remove('disappearing');
       }, messages.length * 50 + 500);
     });
   }

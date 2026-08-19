@@ -1008,7 +1008,7 @@ body.story-open .petals--idle {
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
   z-index: 400;
   pointer-events: auto;
 }
@@ -1020,6 +1020,11 @@ body.story-open .petals--idle {
 
 .continue-btn:active {
   transform: translateX(-50%) scale(0.95);
+}
+
+.continue-btn.disappearing {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.8) translateY(20px);
 }
 
 .reason-icon {
