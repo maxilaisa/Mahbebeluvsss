@@ -866,11 +866,22 @@ body.story-open .petals--idle {
 .reason-special.unlocked {
   cursor: pointer;
   opacity: 1;
-  animation: specialPulse 0.5s ease infinite;
+  animation: specialBlink 1.5s ease-in-out infinite;
 }
 
 .reason-special.unlocked .reason-icon {
   content: '💖';
+}
+
+@keyframes specialBlink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
 }
 
 @keyframes specialPulse {

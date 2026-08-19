@@ -51,6 +51,18 @@
     "I love your creativity.",
     "I love your presence.",
     "I love your gentleness.",
+    "I love your face.",
+    "I love your kisses.",
+    "I love your hugs.",
+    "I love your warmth.",
+    "I love your voice.",
+    "I love your random texts.",
+    "I love your goodnights and goodmornings.",
+    "I love your I LOVE YOU SO MUCH.",
+    "I love your care",
+    "I love your energy.",
+    "I love your laugh.",
+    "I love your body.",
     "I love the little things you do without even realizing how much they mean to me.",
     "I love every memory we've made together.",
     "I love the way you make ordinary moments feel special.",
@@ -393,85 +405,76 @@
     continueBtn.classList.add('hidden');
     errorMessages.innerHTML = '';
 
-    // Show first message in the center normally (no close button)
-    const firstMessage = specialMessages[0];
-    firstMessageText.textContent = firstMessage;
-    firstMessageModal.classList.remove('hidden');
-
-    // After 3 seconds, hide modal and start popping up ALL messages (including first)
-    setTimeout(function () {
-      firstMessageModal.classList.add('hidden');
-      
-      const usedPositions = [];
-      let index = 0; // Start from index 0 (include first message)
-      
-      function showNextMessage() {
-        if (index >= specialMessages.length) {
-          // All messages shown, show continue button
-          continueBtn.classList.remove('hidden');
-          return;
-        }
-
-        const message = specialMessages[index];
-        const errorEl = document.createElement('div');
-        errorEl.className = 'error-message';
-        errorEl.textContent = message;
-        
-        // Random size between 0.85rem and 1.15rem
-        const randomSize = 0.85 + Math.random() * 0.3;
-        errorEl.style.fontSize = randomSize + 'rem';
-        
-        // Calculate safe random position to avoid overlap
-        const containerWidth = window.innerWidth;
-        const containerHeight = window.innerHeight;
-        const messageWidth = Math.min(300, containerWidth * 0.35);
-        const messageHeight = 70;
-        
-        let randomX, randomY;
-        let attempts = 0;
-        let foundPosition = false;
-        
-        // Try to find a position that doesn't overlap too much
-        while (!foundPosition && attempts < 30) {
-          randomX = Math.max(30, Math.random() * (containerWidth - messageWidth - 60));
-          randomY = Math.max(30, Math.random() * (containerHeight - messageHeight - 60));
-          
-          // Check if this position overlaps with existing messages
-          let overlaps = false;
-          for (const pos of usedPositions) {
-            const dx = Math.abs(randomX - pos.x);
-            const dy = Math.abs(randomY - pos.y);
-            // Increased overlap threshold for better spacing
-            if (dx < 180 && dy < 100) {
-              overlaps = true;
-              break;
-            }
-          }
-          
-          if (!overlaps) {
-            foundPosition = true;
-          }
-          attempts++;
-        }
-        
-        usedPositions.push({ x: randomX, y: randomY });
-        
-        errorEl.style.left = randomX + 'px';
-        errorEl.style.top = randomY + 'px';
-        errorEl.style.maxWidth = messageWidth + 'px';
-        errorEl.style.zIndex = index + 1;
-        
-        // Make message draggable
-        makeDraggable(errorEl);
-        
-        errorMessages.appendChild(errorEl);
-        
-        index++;
-        setTimeout(showNextMessage, 800);
+    // Start popping up ALL messages immediately (no initial modal)
+    const usedPositions = [];
+    let index = 0;
+    
+    function showNextMessage() {
+      if (index >= specialMessages.length) {
+        // All messages shown, show continue button
+        continueBtn.classList.remove('hidden');
+        return;
       }
 
-      showNextMessage();
-    }, 3000);
+      const message = specialMessages[index];
+      const errorEl = document.createElement('div');
+      errorEl.className = 'error-message';
+      errorEl.textContent = message;
+      
+      // Random size between 0.85rem and 1.15rem
+      const randomSize = 0.85 + Math.random() * 0.3;
+      errorEl.style.fontSize = randomSize + 'rem';
+      
+      // Calculate safe random position to avoid overlap
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+      const messageWidth = Math.min(300, containerWidth * 0.35);
+      const messageHeight = 70;
+      
+      let randomX, randomY;
+      let attempts = 0;
+      let foundPosition = false;
+      
+      // Try to find a position that doesn't overlap too much
+      while (!foundPosition && attempts < 30) {
+        randomX = Math.max(30, Math.random() * (containerWidth - messageWidth - 60));
+        randomY = Math.max(30, Math.random() * (containerHeight - messageHeight - 60));
+        
+        // Check if this position overlaps with existing messages
+        let overlaps = false;
+        for (const pos of usedPositions) {
+          const dx = Math.abs(randomX - pos.x);
+          const dy = Math.abs(randomY - pos.y);
+          // Increased overlap threshold for better spacing
+          if (dx < 180 && dy < 100) {
+            overlaps = true;
+            break;
+          }
+        }
+        
+        if (!overlaps) {
+          foundPosition = true;
+        }
+        attempts++;
+      }
+      
+      usedPositions.push({ x: randomX, y: randomY });
+      
+      errorEl.style.left = randomX + 'px';
+      errorEl.style.top = randomY + 'px';
+      errorEl.style.maxWidth = messageWidth + 'px';
+      errorEl.style.zIndex = index + 1;
+      
+      // Make message draggable
+      makeDraggable(errorEl);
+      
+      errorMessages.appendChild(errorEl);
+      
+      index++;
+      setTimeout(showNextMessage, 800);
+    }
+
+    showNextMessage();
   }
 
   if (continueBtn) {
