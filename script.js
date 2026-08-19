@@ -461,6 +461,9 @@
         errorEl.style.maxWidth = messageWidth + 'px';
         errorEl.style.zIndex = index + 1;
         
+        // Make message draggable
+        makeDraggable(errorEl);
+        
         errorMessages.appendChild(errorEl);
         
         index++;
@@ -487,6 +490,72 @@
         errorMessages.innerHTML = '';
       }, messages.length * 50 + 500);
     });
+  }
+
+  function makeDraggable(element) {
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
+
+    element.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      initialX = element.offsetLeft;
+      initialY = element.offsetTop;
+      element.style.cursor = 'grabbing';
+      element.style.zIndex = 1000; // Bring to front while dragging
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      element.style.left = (initialX + dx) + 'px';
+      element.style.top = (initialY + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', function () {
+      if (isDragging) {
+        isDragging = false;
+        element.style.cursor = 'grab';
+        element.style.zIndex = parseInt(element.getAttribute('data-original-zindex')) || 1;
+      }
+    });
+
+    // Touch support for mobile
+    element.addEventListener('touchstart', function (e) {
+      isDragging = true;
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      initialX = element.offsetLeft;
+      initialY = element.offsetTop;
+      element.style.cursor = 'grabbing';
+      element.style.zIndex = 1000;
+    });
+
+    document.addEventListener('touchmove', function (e) {
+      if (!isDragging) return;
+
+      const touch = e.touches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      element.style.left = (initialX + dx) + 'px';
+      element.style.top = (initialY + dy) + 'px';
+    });
+
+    document.addEventListener('touchend', function () {
+      if (isDragging) {
+        isDragging = false;
+        element.style.cursor = 'grab';
+        element.style.zIndex = parseInt(element.getAttribute('data-original-zindex')) || 1;
+      }
+    });
+
+    element.style.cursor = 'grab';
   }
 
   function closeModal() {
