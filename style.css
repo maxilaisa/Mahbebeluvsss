@@ -329,12 +329,23 @@ body.story-open .petals--idle {
   color: var(--rose-dark);
 }
 
+/* ── Floating Stickers ── */
+.floating-stickers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/* Stickers will be added here later */
+
 /* ── Floating Petals ── */
 .petals {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
   overflow: hidden;
 }
 
