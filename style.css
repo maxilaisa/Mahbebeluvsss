@@ -17,6 +17,112 @@
   --font-script: 'Cormorant Garamond', 'Brush Script MT', cursive;
 }
 
+/* ── Lock Screen ── */
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--blush-soft) 100%);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.lock-screen.is-unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lock-content {
+  text-align: center;
+  padding: 2rem;
+  animation: lockFadeIn 0.5s ease;
+}
+
+@keyframes lockFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lock-title {
+  font-family: 'Great Vibes', 'Brush Script MT', cursive;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 400;
+  color: var(--rose-dark);
+  margin-bottom: 0.5rem;
+  text-shadow: rgba(169, 67, 87, 0.15) 2px 2px 4px;
+}
+
+.lock-hint {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.pin-inputs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.pin-box {
+  width: 60px;
+  height: 70px;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  border: 3px solid var(--blush);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: all 0.3s ease;
+  outline: none;
+  caret-color: var(--rose-dark);
+}
+
+.pin-box:focus {
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 0 4px rgba(169, 67, 87, 0.15);
+  transform: scale(1.05);
+}
+
+.pin-box.filled {
+  border-color: var(--rose);
+  background: var(--blush-soft);
+}
+
+.lock-error {
+  color: var(--rose-dark);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.lock-hint-small {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  opacity: 0.7;
+}
+
 /* ── Reset & Base ── */
 *, *::before, *::after {
   box-sizing: border-box;
