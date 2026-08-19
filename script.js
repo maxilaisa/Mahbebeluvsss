@@ -404,20 +404,26 @@
       errorEl.className = 'error-message';
       errorEl.textContent = message;
       
-      // Random position
-      const maxX = errorMessages.clientWidth - 200;
-      const maxY = errorMessages.clientHeight - 50;
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+      // Calculate safe random position to avoid cutoff
+      const containerWidth = errorMessages.clientWidth;
+      const containerHeight = errorMessages.clientHeight;
+      const messageWidth = Math.min(300, containerWidth * 0.8);
+      const messageHeight = 60;
+      
+      const maxX = containerWidth - messageWidth - 20;
+      const maxY = containerHeight - messageHeight - 20;
+      const randomX = Math.max(10, Math.random() * maxX);
+      const randomY = Math.max(10, Math.random() * maxY);
       
       errorEl.style.left = randomX + 'px';
       errorEl.style.top = randomY + 'px';
+      errorEl.style.maxWidth = messageWidth + 'px';
       errorEl.style.zIndex = index + 1;
       
       errorMessages.appendChild(errorEl);
       
       index++;
-      setTimeout(showNextMessage, 150);
+      setTimeout(showNextMessage, 800);
     }
 
     showNextMessage();

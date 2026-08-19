@@ -957,10 +957,11 @@ body.story-open .petals--idle {
   font-size: 1rem;
   font-weight: bold;
   box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
   animation: errorPop 0.3s ease;
-  max-width: 90%;
   z-index: 1;
+  line-height: 1.4;
 }
 
 @keyframes errorPop {
