@@ -1,9 +1,9 @@
 services:
   - type: web
     name: monthsary
-    env: node
-    buildCommand: npm install -g serve
-    startCommand: serve -s . -l 8080
+    env: static
+    buildCommand: ""
+    startCommand: ""
     headers:
       - source: /
         headers:
