@@ -391,7 +391,9 @@
     continueBtn.classList.add('hidden');
     errorMessages.innerHTML = '';
 
+    const usedPositions = [];
     let index = 0;
+    
     function showNextMessage() {
       if (index >= specialMessages.length) {
         // All messages shown, show continue button
@@ -404,16 +406,43 @@
       errorEl.className = 'error-message';
       errorEl.textContent = message;
       
-      // Calculate safe random position to avoid cutoff
-      const containerWidth = errorMessages.clientWidth;
-      const containerHeight = errorMessages.clientHeight;
-      const messageWidth = Math.min(300, containerWidth * 0.8);
-      const messageHeight = 60;
+      // Random size between 0.85rem and 1.15rem
+      const randomSize = 0.85 + Math.random() * 0.3;
+      errorEl.style.fontSize = randomSize + 'rem';
       
-      const maxX = containerWidth - messageWidth - 20;
-      const maxY = containerHeight - messageHeight - 20;
-      const randomX = Math.max(10, Math.random() * maxX);
-      const randomY = Math.max(10, Math.random() * maxY);
+      // Calculate safe random position to avoid overlap
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+      const messageWidth = Math.min(350, containerWidth * 0.4);
+      const messageHeight = 80;
+      
+      let randomX, randomY;
+      let attempts = 0;
+      let foundPosition = false;
+      
+      // Try to find a position that doesn't overlap too much
+      while (!foundPosition && attempts < 20) {
+        randomX = Math.max(20, Math.random() * (containerWidth - messageWidth - 40));
+        randomY = Math.max(20, Math.random() * (containerHeight - messageHeight - 40));
+        
+        // Check if this position overlaps with existing messages
+        let overlaps = false;
+        for (const pos of usedPositions) {
+          const dx = Math.abs(randomX - pos.x);
+          const dy = Math.abs(randomY - pos.y);
+          if (dx < 150 && dy < 80) {
+            overlaps = true;
+            break;
+          }
+        }
+        
+        if (!overlaps) {
+          foundPosition = true;
+        }
+        attempts++;
+      }
+      
+      usedPositions.push({ x: randomX, y: randomY });
       
       errorEl.style.left = randomX + 'px';
       errorEl.style.top = randomY + 'px';

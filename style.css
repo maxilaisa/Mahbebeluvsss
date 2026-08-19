@@ -931,37 +931,40 @@ body.story-open .petals--idle {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(0, 0, 0, 0.9);
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  pointer-events: none;
 }
 
 .error-messages {
-  position: relative;
+  position: fixed;
+  inset: 0;
   width: 100%;
-  max-width: 600px;
-  height: 80vh;
+  height: 100%;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .error-message {
   position: absolute;
   background: #ff0000;
   color: #ffffff;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 8px;
   font-family: 'Courier New', monospace;
-  font-size: 1rem;
   font-weight: bold;
   box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
   white-space: normal;
   word-wrap: break-word;
   animation: errorPop 0.3s ease;
   z-index: 1;
-  line-height: 1.4;
+  line-height: 1.3;
+  pointer-events: auto;
+  max-width: 350px;
 }
 
 @keyframes errorPop {
