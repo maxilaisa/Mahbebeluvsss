@@ -1,9 +1,9 @@
 services:
   - type: web
     name: monthsary
-    env: static
-    buildCommand: ""
-    startCommand: ""
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
     headers:
       - source: /
         headers:

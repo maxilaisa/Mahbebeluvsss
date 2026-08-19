@@ -1,0 +1,11 @@
+{
+  "name": "monthsary",
+  "version": "1.0.0",
+  "description": "Static site for monthsary",
+  "scripts": {
+    "start": "serve -s . -l 8080"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
