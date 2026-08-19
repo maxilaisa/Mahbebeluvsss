@@ -15,10 +15,45 @@
   const reasonText = document.getElementById('reason-text');
   const closeReason = document.getElementById('close-reason');
   const petalsContainer = document.querySelector('.petals');
+  const errorOverlay = document.getElementById('error-overlay');
+  const errorMessages = document.getElementById('error-messages');
+  const continueBtn = document.getElementById('continue-btn');
 
   let sectionObserver = null;
   let storyReady = false;
   let isLocked = true;
+  let openedNormalCards = 0;
+  const totalNormalCards = 5;
+  const specialMessages = [
+    "I love your eyes.",
+    "I love the way you fix your hair.",
+    "I love the way you know what I want and still give me permission to do it.",
+    "I love the way you still talk to me even when we're arguing.",
+    "I love the way you choose me even when it's hard.",
+    "I love the way you never give up on me.",
+    "I love the way you comfort me whenever I'm sad.",
+    "I love your warmth.",
+    "I love your jokes.",
+    "I love your smile.",
+    "I love your thoughts.",
+    "I love your words.",
+    "I love your heart.",
+    "I love your vibe.",
+    "I love your true self.",
+    "I love your support.",
+    "I love your bravery.",
+    "I love your music taste.",
+    "I love your favorite color.",
+    "I love your honesty.",
+    "I love your kindness.",
+    "I love your creativity.",
+    "I love your presence.",
+    "I love your gentleness.",
+    "I love the little things you do without even realizing how much they mean to me.",
+    "I love every memory we've made together.",
+    "I love the way you make ordinary moments feel special.",
+    "I love the person you are, the person you're becoming, and every little part of you that makes you you."
+  ];
 
   /* ── Lock Screen ── */
   function setupLockScreen() {
@@ -240,6 +275,7 @@
   function resetEnvelope() {
     storyReady = false;
     isLocked = true;
+    openedNormalCards = 0;
     document.body.classList.remove('story-open');
     story.classList.add('hidden');
 
@@ -254,6 +290,21 @@
     document.querySelectorAll('.section').forEach(function (el) {
       el.classList.remove('visible');
     });
+
+    // Reset reason cards
+    document.querySelectorAll('.reason-card').forEach(function (card) {
+      card.classList.remove('opened');
+    });
+
+    // Reset special card
+    const specialCard = document.querySelector('.reason-special');
+    if (specialCard) {
+      specialCard.classList.add('locked');
+      specialCard.classList.remove('unlocked');
+      specialCard.setAttribute('data-opened', '0');
+      specialCard.querySelector('.reason-icon').textContent = '🔒';
+      specialCard.querySelector('.reason-label').textContent = '???';
+    }
   }
 
   /* ── Envelope tap ── */
@@ -295,12 +346,89 @@
   /* ── Reason cards ── */
   document.querySelectorAll('.reason-card').forEach(function (card) {
     card.addEventListener('click', function () {
+      const isSpecial = card.getAttribute('data-special') === 'true';
+      
+      if (isSpecial) {
+        // Check if unlocked
+        if (openedNormalCards < totalNormalCards) {
+          // Still locked, don't open
+          return;
+        }
+        // Unlocked, show special messages
+        showSpecialMessages();
+        return;
+      }
+
+      // Normal card
       var reason = card.getAttribute('data-reason');
       reasonText.textContent = reason;
       reasonModal.classList.remove('hidden');
-      card.classList.add('opened');
+      
+      if (!card.classList.contains('opened')) {
+        card.classList.add('opened');
+        openedNormalCards++;
+        updateSpecialCard();
+      }
     });
   });
+
+  function updateSpecialCard() {
+    const specialCard = document.querySelector('.reason-special');
+    if (!specialCard) return;
+
+    specialCard.setAttribute('data-opened', openedNormalCards);
+
+    if (openedNormalCards >= totalNormalCards) {
+      specialCard.classList.remove('locked');
+      specialCard.classList.add('unlocked');
+      specialCard.querySelector('.reason-icon').textContent = '💖';
+      specialCard.querySelector('.reason-label').textContent = 'Open me!';
+    }
+  }
+
+  function showSpecialMessages() {
+    errorOverlay.classList.remove('hidden');
+    continueBtn.classList.add('hidden');
+    errorMessages.innerHTML = '';
+
+    let index = 0;
+    function showNextMessage() {
+      if (index >= specialMessages.length) {
+        // All messages shown, show continue button
+        continueBtn.classList.remove('hidden');
+        return;
+      }
+
+      const message = specialMessages[index];
+      const errorEl = document.createElement('div');
+      errorEl.className = 'error-message';
+      errorEl.textContent = message;
+      
+      // Random position
+      const maxX = errorMessages.clientWidth - 200;
+      const maxY = errorMessages.clientHeight - 50;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      
+      errorEl.style.left = randomX + 'px';
+      errorEl.style.top = randomY + 'px';
+      errorEl.style.zIndex = index + 1;
+      
+      errorMessages.appendChild(errorEl);
+      
+      index++;
+      setTimeout(showNextMessage, 150);
+    }
+
+    showNextMessage();
+  }
+
+  if (continueBtn) {
+    continueBtn.addEventListener('click', function () {
+      errorOverlay.classList.add('hidden');
+      errorMessages.innerHTML = '';
+    });
+  }
 
   function closeModal() {
     reasonModal.classList.add('hidden');
