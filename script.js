@@ -503,7 +503,8 @@
       initialX = element.offsetLeft;
       initialY = element.offsetTop;
       element.style.cursor = 'grabbing';
-      element.style.zIndex = 1000; // Bring to front while dragging
+      element.style.zIndex = 1000; // Bring to front and keep it there
+      e.preventDefault(); // Prevent text selection
     });
 
     document.addEventListener('mousemove', function (e) {
@@ -514,13 +515,15 @@
 
       element.style.left = (initialX + dx) + 'px';
       element.style.top = (initialY + dy) + 'px';
+      
+      e.preventDefault(); // Prevent scrolling while dragging
     });
 
     document.addEventListener('mouseup', function () {
       if (isDragging) {
         isDragging = false;
         element.style.cursor = 'grab';
-        element.style.zIndex = parseInt(element.getAttribute('data-original-zindex')) || 1;
+        // Keep z-index at 1000 so it stays on top
       }
     });
 
@@ -545,13 +548,15 @@
 
       element.style.left = (initialX + dx) + 'px';
       element.style.top = (initialY + dy) + 'px';
-    });
+      
+      e.preventDefault(); // Prevent scrolling while dragging
+    }, { passive: false });
 
     document.addEventListener('touchend', function () {
       if (isDragging) {
         isDragging = false;
         element.style.cursor = 'grab';
-        element.style.zIndex = parseInt(element.getAttribute('data-original-zindex')) || 1;
+        // Keep z-index at 1000 so it stays on top
       }
     });
 
